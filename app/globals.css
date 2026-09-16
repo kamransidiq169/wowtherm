@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@theme {
+  /* Wipe Tailwind's default palette — WowTherm uses its own tokens only. */
+  --color-*: initial;
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Warm stone accent — sophisticated copper/bronze */
+  --color-stone-50: #faf8f5;
+  --color-stone-100: #f3efe8;
+  --color-stone-200: #e8e0d4;
+  --color-stone-300: #d4c8b8;
+  --color-stone-400: #b8a894;
+  --color-stone-500: #9c8a74;
+  --color-stone-600: #857462;
+  --color-stone-700: #6d5e50;
+  --color-stone-800: #5a4d42;
+  --color-stone-900: #4a4038;
+  --color-stone-950: #2a2520;
+
+  /* Deep warm charcoal */
+  --color-charcoal-50: #f6f5f4;
+  --color-charcoal-100: #e8e6e3;
+  --color-charcoal-200: #d1cdc7;
+  --color-charcoal-300: #b0aaa2;
+  --color-charcoal-400: #8a847b;
+  --color-charcoal-500: #6e6860;
+  --color-charcoal-600: #57524b;
+  --color-charcoal-700: #46423c;
+  --color-charcoal-800: #302d29;
+  --color-charcoal-900: #1a1a1a;
+  --color-charcoal-950: #111110;
+
+  /* Warm ivory background */
+  --color-ivory-50: #fdfcfa;
+  --color-ivory-100: #faf7f2;
+  --color-ivory-200: #f3ede2;
+  --color-ivory-300: #e9dfcf;
+  --color-ivory-400: #dcccb2;
+
+  /* Subtle copper accent */
+  --color-copper-50: #fdf5f0;
+  --color-copper-100: #fae8db;
+  --color-copper-200: #f4cfb5;
+  --color-copper-300: #ecb088;
+  --color-copper-400: #e28e5c;
+  --color-copper-500: #d97a3f;
+  --color-copper-600: #c86830;
+  --color-copper-700: #a65327;
+  --color-copper-800: #864323;
+  --color-copper-900: #6d381f;
+  --color-copper-950: #3a1b0e;
+
+  --color-danger: #b3402a;
+
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --radius-field: 0.625rem;
+
+  --shadow-card: 0 1px 2px rgb(26 26 26 / 0.04), 0 8px 24px -8px rgb(26 26 26 / 0.08);
+  --shadow-card-hover: 0 2px 4px rgb(26 26 26 / 0.06), 0 24px 48px -12px rgb(26 26 26 / 0.14);
+  --shadow-elevated: 0 4px 12px rgb(26 26 26 / 0.08), 0 32px 64px -16px rgb(26 26 26 / 0.16);
+
+  /* Motion tokens */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.7s;
+  --duration-slower: 1s;
+
+  --animate-marquee: marquee 36s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-ivory-100);
+    color: var(--color-charcoal-900);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  ::selection {
+    background-color: var(--color-copper-500);
+    color: var(--color-white);
+  }
+
+  /* Focus visible styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-copper-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Container utility */
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+/* No scrollbar utility */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Premium typography scale */
+@utility text-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2.5rem + 4vw, 6rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+@utility text-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.8rem + 2.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+@utility text-display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.5rem + 1.5vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+@utility text-heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+@utility text-heading-lg {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+@utility text-heading-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+}
+
+@utility text-body-lg {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+@utility text-body-md {
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+@utility text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility text-caption {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* Scrollable rows that shouldn't show a bar */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Gradient overlays */
+@utility gradient-dark {
+  background: linear-gradient(180deg, rgba(17, 17, 16, 0.95) 0%, rgba(26, 26, 26, 0.85) 100%);
+}
+
+@utility gradient-warm {
+  background: linear-gradient(180deg, rgba(250, 247, 242, 0) 0%, rgba(250, 247, 242, 1) 100%);
+}
+
+/* Accordion animations */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
