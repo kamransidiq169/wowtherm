@@ -126,7 +126,7 @@ function AboutHero() {
           className="absolute inset-[-2%]"
         >
           <Image
-            src="/about.png"
+            src="/home.png"
             alt="Warm, softly lit living room with heated flooring"
             fill
             priority

@@ -99,7 +99,7 @@ export default function ServicesPage() {
   ========================================================= */}
   <div className="absolute inset-0">
     <img
-      src="/about.png"
+      src="/service.png"
       alt="Installers preparing a floor for underfloor heating installation"
       className="absolute inset-0 h-full w-full object-cover object-center"
     />
@@ -256,51 +256,9 @@ export default function ServicesPage() {
           {/* vertical line */}
           <div className="absolute -left-6 top-0 h-full w-px bg-white/10" />
 
-          {/* top marker */}
-          <div className="mb-10 flex items-center gap-3">
-            <span className="size-2 rounded-full border border-copper-400" />
+        
 
-            <span className="text-[9px] uppercase tracking-[0.24em] text-white/40">
-              Engineered warmth
-            </span>
-          </div>
-
-          {/* technical detail */}
-          <div className="space-y-8">
-            <div>
-              <p className="font-display text-3xl text-white">
-                01
-              </p>
-
-              <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/35">
-                Measure
-              </p>
-            </div>
-
-            <div className="h-px w-full bg-white/10" />
-
-            <div>
-              <p className="font-display text-3xl text-white">
-                02
-              </p>
-
-              <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/35">
-                Engineer
-              </p>
-            </div>
-
-            <div className="h-px w-full bg-white/10" />
-
-            <div>
-              <p className="font-display text-3xl text-copper-400">
-                03
-              </p>
-
-              <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-copper-100/45">
-                Install
-              </p>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

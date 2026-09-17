@@ -541,19 +541,21 @@ export function Hero() {
               </svg>
 
               <span
-                ref={thermGroupRef}
-                className="inline-flex text-copper-400 will-change-transform"
-              >
-                {HERO_WORDMARK.slice(SPLIT_INDEX).map((letter, i) => (
-                  <span
-                    key={`${letter}-${i + SPLIT_INDEX}`}
-                    ref={(el) => { letterRefs.current[i + SPLIT_INDEX] = el; }}
-                    className="inline-block will-change-transform"
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
+  ref={thermGroupRef}
+  className="inline-flex text-[#B85F2E] will-change-transform"
+>
+  {HERO_WORDMARK.slice(SPLIT_INDEX).map((letter, i) => (
+    <span
+      key={`${letter}-${i + SPLIT_INDEX}`}
+      ref={(el) => {
+        letterRefs.current[i + SPLIT_INDEX] = el;
+      }}
+      className="inline-block will-change-transform"
+    >
+      {letter}
+    </span>
+  ))}
+</span>
             </div>
           </div>
 
