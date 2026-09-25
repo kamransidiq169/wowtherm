@@ -1,6 +1,4 @@
 
-
-
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -43,7 +41,7 @@ function ScrollIndicator({ visible }: { visible: boolean }) {
         pointerEvents: visible ? "auto" : "none",
       }}
     >
-      <span className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase">
+      <span className="font-mono text-[10px] font-medium tracking-[0.14em] uppercase">
         Scroll
       </span>
       <span className="flex size-8 items-center justify-center rounded-full border border-white/25">
@@ -53,29 +51,6 @@ function ScrollIndicator({ visible }: { visible: boolean }) {
   );
 }
 
-// function HeroCta({ visible }: { visible: boolean }) {
-//   return (
-//     <div
-//       className="pointer-events-auto"
-//       style={{
-//         opacity: visible ? 1 : 0,
-//         transform: visible ? "translateY(0)" : "translateY(10px)",
-//         transition:
-//           "opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1)",
-//       }}
-//     >
-//       <Link
-//         href="/products"
-//         className="group inline-flex items-center gap-3 border-b border-white/20 pb-1 font-sans text-xs font-medium tracking-[0.15em] text-white/50 uppercase transition-colors hover:border-white/40 hover:text-white/80"
-//       >
-//         EXPLORE HEATING SYSTEMS
-//         <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
-//           →
-//         </span>
-//       </Link>
-//     </div>
-//   );
-// }
 function HeroCta({ visible }: { visible: boolean }) {
   return (
     <div
@@ -407,11 +382,11 @@ export function Hero() {
         />
         <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-6 pt-24 pb-16 text-center md:px-10 md:pt-28">
           <div
-            className="mb-8 flex font-display font-medium"
+            className="mb-8 flex font-display"
             style={{
-              fontSize: "clamp(2.8rem, 2rem + 8vw, 5.5rem)",
+              fontSize: "clamp(2.5rem, 1.5rem + 6vw, 5.5rem)",
               lineHeight: 0.95,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.01em",
             }}
           >
             <span className="text-white">
@@ -424,7 +399,7 @@ export function Hero() {
           <div className="mb-8 flex items-center gap-4">
             <span className="block h-px w-12 bg-copper-500/40" />
             <p className="max-w-sm font-sans text-sm leading-relaxed text-white/45">
-              Beautiful floors above. Precision engineering beneath.
+              Beautiful floors above. Precision engineering.
             </p>
             <span className="block h-px w-12 bg-copper-500/40" />
           </div>
@@ -452,7 +427,7 @@ export function Hero() {
       >
         <div ref={bgRef} className="absolute inset-0 will-change-transform">
           <Image
-            src="/home1.png"
+            src="/her.jpg"
             alt=""
             fill
             priority
@@ -488,11 +463,11 @@ export function Hero() {
         >
           <div className="relative flex items-center justify-center">
             <div
-              className="flex items-center font-display font-medium"
+              className="flex items-center font-display"
               style={{
-                fontSize: "clamp(4.5rem, 3rem + 9vw, 11rem)",
+                fontSize: "clamp(4.5rem, 3rem + 8.5vw, 11rem)",
                 lineHeight: 0.92,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.01em",
               }}
             >
               <span
@@ -540,9 +515,14 @@ export function Hero() {
                 />
               </svg>
 
-              <span
+              {/* <span
   ref={thermGroupRef}
   className="inline-flex text-[#B85F2E] will-change-transform"
+> */}
+
+<span
+  ref={thermGroupRef}
+  className="inline-flex text-[#FF7B00] will-change-transform"
 >
   {HERO_WORDMARK.slice(SPLIT_INDEX).map((letter, i) => (
     <span
@@ -561,18 +541,6 @@ export function Hero() {
 
           <div className="mt-8 flex flex-col items-center gap-5">
                         <div ref={wordmarkSubCopyRef} className="will-change-transform text-center">
-              <div className="mb-4 flex items-center justify-center gap-3">
-                <span className="block h-px w-8 bg-copper-500/40" />
-                <span className="font-sans text-[10px] font-medium tracking-[0.3em] text-copper-400/90 uppercase">
-                  Radiant Comfort
-                </span>
-                <span className="block h-px w-8 bg-copper-500/40" />
-              </div>
-              <p className="max-w-sm font-sans text-sm leading-relaxed text-white/45 md:text-base">
-                Beautiful floors above.{" "}
-                <span className="text-white/70">Precision engineering</span>{" "}
-                beneath.
-              </p>
             </div>
             <div ref={wordmarkCtaRef} className="will-change-transform">
               <HeroCta visible={true} />
@@ -589,3 +557,7 @@ export function Hero() {
     </section>
   );
 }
+
+
+
+

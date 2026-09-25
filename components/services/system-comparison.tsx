@@ -158,18 +158,18 @@ export function SystemComparison() {
         <Reveal>
           <div className="mb-16 flex items-end justify-between border-b border-charcoal-900/10 pb-8">
             <div className="flex items-center gap-3">
-              <span className="font-display text-sm text-copper-500">
+              <span className="font-mono text-sm text-copper-500">
                 03
               </span>
 
               <span className="h-px w-8 bg-copper-500/60" />
 
-              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-charcoal-900/45">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-charcoal-900/45">
                 Choosing a system
               </span>
             </div>
 
-            <span className="hidden text-[10px] uppercase tracking-[0.22em] text-charcoal-900/30 md:block">
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-charcoal-900/30 md:block">
               Technical comparison / 01—02
             </span>
           </div>
@@ -182,7 +182,7 @@ export function SystemComparison() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-8">
             <Reveal>
-              <h2 className="font-display text-[clamp(3.2rem,7vw,7.5rem)] font-medium leading-[0.86] tracking-[-0.06em] text-charcoal-950">
+              <h2 className="font-display text-[clamp(3.2rem,7vw,7.5rem)] leading-[0.86] tracking-[-0.04em] text-charcoal-950">
                 Electric,
                 <br />
                 <span className="text-copper-500/65">
@@ -250,18 +250,18 @@ export function SystemComparison() {
                     <div className="flex items-start justify-between gap-6">
                       <div>
                         <div className="mb-4 flex items-center gap-3">
-                          <span className="font-display text-sm text-copper-500">
+                          <span className="font-mono text-sm text-copper-500">
                             {column.number}
                           </span>
 
                           <span className="h-px w-6 bg-copper-500/30" />
 
-                          <span className="text-[9px] uppercase tracking-[0.22em] text-charcoal-900/35">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-900/35">
                             Heating system
                           </span>
                         </div>
 
-                        <h3 className="font-display text-[clamp(2.4rem,4vw,4.5rem)] font-medium leading-none tracking-[-0.045em] text-charcoal-950">
+                        <h3 className="font-display text-[clamp(2.4rem,4vw,4.5rem)] leading-none tracking-[-0.03em] text-charcoal-950">
                           {column.name}
                         </h3>
 
@@ -271,8 +271,7 @@ export function SystemComparison() {
                       </div>
 
                       {/* technical circle */}
-                      <div className="hidden size-14 shrink-0 items-center justify-center rounded-full border border-charcoal-900/10 sm:flex">
-                        <span className="text-[9px] uppercase tracking-[0.15em] text-charcoal-900/35">
+                      <div className="hidden size-14 shrink-0 items-center justify-center rounded-full border border-charcoal-900/10 sm:flex">                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-900/35">
                           {column.number}
                         </span>
                       </div>
@@ -290,7 +289,7 @@ export function SystemComparison() {
                         className="group/row grid gap-3 border-t border-charcoal-900/10 py-6 sm:grid-cols-[130px_1fr]"
                       >
                         {/* label */}
-                        <dt className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal-900/35">
+                        <dt className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-charcoal-900/35">
                           {row.label}
                         </dt>
 
@@ -310,7 +309,7 @@ export function SystemComparison() {
 
                   {/* Bottom system marker */}
                   <div className="mt-2 flex items-center justify-between border-t border-charcoal-900/10 pt-5">
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-charcoal-900/25">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-900/25">
                       Specification {column.number}
                     </span>
 
@@ -333,7 +332,7 @@ export function SystemComparison() {
                 <div className="flex items-center gap-3">
                   <span className="size-2 rotate-45 border border-copper-500" />
 
-                  <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-copper-600">
+                  <span className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-copper-600">
                     Need a decision?
                   </span>
                 </div>
@@ -348,7 +347,7 @@ export function SystemComparison() {
               </div>
 
               <div className="hidden justify-end md:col-span-2 md:flex">
-                <span className="font-display text-[10px] uppercase tracking-[0.18em] text-charcoal-900/25">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-charcoal-900/25">
                   Measure first
                 </span>
               </div>

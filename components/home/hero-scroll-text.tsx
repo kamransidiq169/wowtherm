@@ -162,7 +162,7 @@ export function HeroScrollText({ progressRef }: HeroScrollTextProps) {
       <TextLayer opacity={controlTextOpacity}>
         <div className="text-center">
           <div className="mb-6">
-            <span className="text-display-xl text-copper-400 font-display">
+            <span className="text-display-xl text-copper-400">
               22°
             </span>
           </div>

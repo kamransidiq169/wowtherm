@@ -194,7 +194,7 @@ function TeamRow({
         aria-expanded={open}
         className="flex w-full items-center gap-6 py-6 text-left md:gap-10 md:py-8"
       >
-        <span className="font-display text-sm text-charcoal-400 tabular-nums">
+        <span className="font-mono text-sm text-charcoal-400 tabular-nums">
           {String(index + 1).padStart(2, "0")}
         </span>
 
@@ -203,7 +203,7 @@ function TeamRow({
           {photo ? (
             <img src={photo} alt="" className="h-full w-full object-cover" />
           ) : (
-            <span className="font-serif text-lg text-copper-400">
+            <span className="font-display text-lg text-copper-400">
               {initials(name)}
             </span>
           )}

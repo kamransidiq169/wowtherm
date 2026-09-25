@@ -80,7 +80,7 @@
 //               </Reveal>
 
 //               <Reveal delay={0.08}>
-//                 <h1 className="font-display text-[clamp(3.5rem,7vw,7.8rem)] font-medium leading-[0.86] tracking-[-0.06em] text-white">
+//                 <h1 className="font-display text-[clamp(3.5rem,7vw,7.8rem)] leading-[0.86] tracking-[-0.04em] text-white">
 //                   Warmth,
 //                   <br />
 //                   <span className="text-copper-400">properly placed.</span>
@@ -204,7 +204,7 @@
 //             </Reveal>
 
 //             <Reveal delay={0.08}>
-//               <h2 className="max-w-5xl font-display text-[clamp(2.4rem,5vw,5.4rem)] leading-[0.98] tracking-[-0.05em] text-charcoal-950">
+//               <h2 className="max-w-5xl font-display text-[clamp(2.4rem,5vw,5.4rem)] leading-[0.98] tracking-[-0.035em] text-charcoal-950">
 //                 We don't start with a product.
 //                 <br />
 //                 <span className="text-copper-500/70">
@@ -340,7 +340,7 @@
 
 //             <Reveal delay={0.08}>
 //               <div>
-//                 <p className="font-display text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.98] tracking-[-0.05em] text-charcoal-950">
+//                 <p className="font-display text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.98] tracking-[-0.035em] text-charcoal-950">
 //                   The best heating system is the one you{" "}
 //                   <span className="text-copper-500">never have to see.</span>
 //                 </p>
@@ -409,7 +409,7 @@
 //           </Reveal>
 
 //           <Reveal delay={0.08}>
-//             <h2 className="mx-auto mt-7 max-w-5xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.055em]">
+//             <h2 className="mx-auto mt-7 max-w-5xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.035em]">
 //               Tell us about
 //               <br />
 //               <span className="text-copper-400">your space.</span>
@@ -594,11 +594,11 @@ export default function SolutionsPage() {
         <div className="container-site relative z-10 flex min-h-[92svh] flex-col">
           {/* Top bar */}
           <div className="flex items-center justify-between border-b border-white/10 py-5">
-            <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-white/40">
               WOWTHERM
             </span>
 
-            <span className="text-[10px] uppercase tracking-[0.22em] text-copper-400">
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-400">
               Solutions
             </span>
           </div>
@@ -610,14 +610,14 @@ export default function SolutionsPage() {
                 <div className="mb-7 flex items-center gap-3">
                   <span className="h-px w-10 bg-copper-400" />
 
-                  <span className="text-[11px] uppercase tracking-[0.24em] text-copper-400">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-copper-400">
                     01 / Spaces
                   </span>
                 </div>
               </Reveal>
 
               <Reveal delay={0.08}>
-                <h1 className="font-display text-[clamp(3.5rem,7vw,7.8rem)] font-medium leading-[0.86] tracking-[-0.06em] text-white">
+                <h1 className="font-display text-[clamp(3.5rem,7vw,7.8rem)] leading-[0.86] tracking-[-0.04em] text-white">
                   Warmth,
                   <br />
                   <span className="text-copper-400">
@@ -674,7 +674,7 @@ export default function SolutionsPage() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-charcoal-950/45 via-transparent to-white/[0.04]" />
 
                 <div className="absolute left-5 top-5 border-l border-t border-copper-400/60 p-3">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/55">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/55">
                     Engineered comfort
                   </span>
                 </div>
@@ -682,7 +682,7 @@ export default function SolutionsPage() {
                 <div className="absolute bottom-5 right-5 flex items-center gap-2">
                   <span className="size-1.5 rounded-full bg-copper-400" />
 
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/60">
                     Application / 01
                   </span>
                 </div>
@@ -707,7 +707,7 @@ export default function SolutionsPage() {
                 key={number}
                 className="border-white/10 py-3 md:border-l md:px-6 md:first:border-l-0"
               >
-                <p className="text-[9px] uppercase tracking-[0.2em] text-white/25">
+                <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">
                   {number} / {label}
                 </p>
 
@@ -737,7 +737,7 @@ export default function SolutionsPage() {
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-copper-500" />
 
-                  <span className="text-[10px] uppercase tracking-[0.24em] text-copper-600">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-600">
                     02 / The approach
                   </span>
                 </div>
@@ -750,7 +750,7 @@ export default function SolutionsPage() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <h2 className="max-w-5xl font-display text-[clamp(2.4rem,5vw,5.4rem)] leading-[0.98] tracking-[-0.05em] text-charcoal-950">
+              <h2 className="max-w-5xl font-display text-[clamp(2.4rem,5vw,5.4rem)] leading-[0.98] tracking-[-0.035em] text-charcoal-950">
                 We don't start with a product.
                 <br />
                 <span className="text-copper-500/70">
@@ -807,7 +807,7 @@ export default function SolutionsPage() {
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-copper-400" />
 
-                  <span className="text-[10px] uppercase tracking-[0.24em] text-copper-400">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-400">
                     03 / Where we work
                   </span>
                 </div>
@@ -820,7 +820,7 @@ export default function SolutionsPage() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <h2 className="max-w-5xl font-display text-[clamp(2.7rem,5.5vw,6rem)] leading-[0.92] tracking-[-0.055em]">
+              <h2 className="max-w-5xl font-display text-[clamp(2.7rem,5.5vw,6rem)] leading-[0.92] tracking-[-0.035em]">
                 Solutions for
                 <br />
                 <span className="text-copper-400">
@@ -850,7 +850,7 @@ export default function SolutionsPage() {
               >
                 {/* Number */}
                 <div className="mb-5 md:mb-0">
-                  <span className="font-display text-3xl text-copper-400/70">
+                  <span className="font-mono text-3xl text-copper-400/70">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -868,7 +868,7 @@ export default function SolutionsPage() {
                   </div>
 
                   <div>
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-copper-400/70">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-400/70">
                       {project.type}
                     </p>
 
@@ -892,7 +892,7 @@ export default function SolutionsPage() {
                   </div>
 
                   <div>
-                    <p className="text-[9px] uppercase tracking-[0.18em] text-white/25">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">
                       System
                     </p>
 
@@ -961,7 +961,7 @@ export default function SolutionsPage() {
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-copper-500" />
 
-                <span className="text-[10px] uppercase tracking-[0.24em] text-copper-600">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-600">
                   04 / Design principle
                 </span>
               </div>
@@ -969,7 +969,7 @@ export default function SolutionsPage() {
 
             <Reveal delay={0.08}>
               <div>
-                <p className="font-display text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.98] tracking-[-0.05em] text-charcoal-950">
+                <p className="font-display text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.98] tracking-[-0.035em] text-charcoal-950">
                   The best heating system is the one you{" "}
                   <span className="text-copper-500">
                     never have to see.
@@ -1047,13 +1047,13 @@ export default function SolutionsPage() {
 
         <div className="container-site relative z-10 text-center">
           <Reveal>
-            <p className="text-[10px] uppercase tracking-[0.25em] text-copper-400">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-400">
               05 / Your space
             </p>
           </Reveal>
 
           <Reveal delay={0.08}>
-            <h2 className="mx-auto mt-7 max-w-5xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.055em]">
+            <h2 className="mx-auto mt-7 max-w-5xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.035em]">
               Tell us about
               <br />
               <span className="text-copper-400">

@@ -156,18 +156,18 @@ export function FloorAnatomy() {
         <Reveal>
           <div className="mb-16 flex items-end justify-between border-b border-white/10 pb-8">
             <div className="flex items-center gap-3">
-              <span className="font-display text-sm text-copper-400">
+              <span className="font-mono text-sm text-copper-400">
                 02
               </span>
 
               <span className="h-px w-8 bg-copper-400/60" />
 
-              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-white/40">
                 What's under the tile
               </span>
             </div>
 
-            <span className="hidden text-[10px] uppercase tracking-[0.22em] text-white/25 md:block">
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-white/25 md:block">
               Floor construction / Section A
             </span>
           </div>
@@ -180,7 +180,7 @@ export function FloorAnatomy() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-7">
             <Reveal>
-              <h2 className="font-display text-[clamp(3rem,7vw,7rem)] font-medium leading-[0.88] tracking-[-0.055em] text-white">
+              <h2 className="font-display text-[clamp(3rem,7vw,7rem)] leading-[0.88] tracking-[-0.04em] text-white">
                 Anatomy of
                 <br />
                 <span className="text-copper-400/70">
@@ -250,7 +250,7 @@ export function FloorAnatomy() {
                           {/* number */}
                           <span
                             className={[
-                              "font-display text-sm",
+                              "font-mono text-sm",
                               i === 2
                                 ? "text-copper-300"
                                 : "text-white/35",
@@ -261,7 +261,7 @@ export function FloorAnatomy() {
 
                           {/* layer info */}
                           <div className="flex-1">
-                            <p className="mb-1 text-[9px] uppercase tracking-[0.2em] text-copper-400/60">
+                            <p className="font-mono mb-1 text-[9px] uppercase tracking-[0.12em] text-copper-400/60">
                               {layer.short}
                             </p>
 
@@ -278,7 +278,7 @@ export function FloorAnatomy() {
                           </div>
 
                           {/* dimension marker */}
-                          <span className="hidden text-[9px] tracking-[0.16em] text-white/20 sm:block">
+                          <span className="hidden font-mono text-[9px] tracking-[0.12em] text-white/20 sm:block">
                             LAYER {i + 1}
                           </span>
                         </div>
@@ -288,12 +288,11 @@ export function FloorAnatomy() {
                 </div>
 
                 {/* bottom technical label */}
-                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/25">
+                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">
                     Finished floor
                   </span>
 
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-copper-400/50">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-400/50">
                     ↑ Heat
                   </span>
                 </div>
@@ -312,7 +311,7 @@ export function FloorAnatomy() {
                   <div className="group grid gap-5 border-b border-white/10 py-8 md:grid-cols-[72px_1fr] md:py-10">
                     {/* number */}
                     <div className="flex items-start">
-                      <span className="font-display text-sm text-copper-400">
+                      <span className="font-mono text-sm text-copper-400">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -324,7 +323,7 @@ export function FloorAnatomy() {
                           {layer.name}
                         </h3>
 
-                        <span className="text-[9px] uppercase tracking-[0.2em] text-white/25 transition-colors duration-300 group-hover:text-copper-400/60">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25 transition-colors duration-300 group-hover:text-copper-400/60">
                           {layer.short}
                         </span>
                       </div>

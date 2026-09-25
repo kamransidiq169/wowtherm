@@ -107,7 +107,7 @@ function CrossSectionBar({
       />
       {progress > 0.3 && (
         <span
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-[10px] font-medium tracking-widest uppercase font-sans transition-opacity"
+          className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-[10px] font-medium tracking-[0.14em] uppercase transition-opacity"
           style={{ opacity: Math.min(1, (progress - 0.3) * 3), color: "#fff" }}
         >
           {label}

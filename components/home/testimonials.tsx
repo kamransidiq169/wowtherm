@@ -37,7 +37,7 @@ export function Testimonials() {
           <div className="relative min-h-[260px] md:min-h-[220px]">
             <span
               aria-hidden
-              className="pointer-events-none absolute -left-2 -top-6 select-none font-serif text-[7rem] leading-none text-copper-500/15 md:text-[9rem]"
+              className="pointer-events-none absolute -left-2 -top-6 select-none font-display text-[7rem] leading-none text-copper-500/15 md:text-[9rem]"
             >
               &ldquo;
             </span>
@@ -51,7 +51,7 @@ export function Testimonials() {
                 transition={{ duration: 0.5, ease: EASE }}
                 className="relative"
               >
-                <p className="font-serif text-2xl leading-snug text-charcoal-900 md:text-3xl lg:text-4xl">
+                <p className="font-display text-2xl leading-snug text-charcoal-900 md:text-3xl lg:text-4xl">
                   {active.quote}
                 </p>
 

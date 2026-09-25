@@ -133,7 +133,7 @@ export function Navbar() {
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative px-1 py-3",
-                    "text-[10px] font-medium uppercase tracking-[0.22em]",
+                    "text-[10px] font-medium uppercase tracking-[0.12em]",
                     "transition-colors duration-300",
                     active
                       ? scrolled
@@ -339,7 +339,7 @@ export function Navbar() {
                         <div className="flex items-center gap-3">
                           <span className="h-px w-7 bg-copper-400" />
 
-                          <Dialog.Title className="text-[9px] font-medium uppercase tracking-[0.28em] text-white/40">
+                          <Dialog.Title className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-white/40">
                             Navigation
                           </Dialog.Title>
                         </div>
@@ -362,11 +362,11 @@ export function Navbar() {
                       {/* Navigation */}
                       <div className="relative flex flex-1 flex-col px-6 pt-10 sm:px-8">
                         <div className="mb-8 flex items-center justify-between">
-                          <span className="text-[9px] uppercase tracking-[0.25em] text-white/25">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">
                             WOWTHERM
                           </span>
 
-                          <span className="text-[9px] uppercase tracking-[0.2em] text-copper-400">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-400">
                             01 — 05
                           </span>
                         </div>
@@ -458,7 +458,7 @@ export function Navbar() {
                           </Link>
 
                           <div className="mt-5 flex items-center justify-between">
-                            <span className="text-[9px] uppercase tracking-[0.2em] text-white/20">
+                            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/20">
                               Engineered warmth
                             </span>
 

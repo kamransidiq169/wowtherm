@@ -183,19 +183,19 @@ export default function ServicesPage() {
       <div className="lg:col-span-8 xl:col-span-7">
         {/* Eyebrow */}
         <div className="mb-8 flex items-center gap-4">
-          <span className="font-display text-sm text-copper-400">
+          <span className="font-mono text-sm text-copper-400">
             01
           </span>
 
           <span className="h-px w-10 bg-copper-400/70" />
 
-          <span className="text-[11px] font-medium uppercase tracking-[0.26em] text-copper-100/60">
+          <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-copper-100/60">
             Services
           </span>
         </div>
 
         {/* Main heading */}
-        <h1 className="max-w-5xl font-display text-[clamp(4rem,9vw,9.5rem)] font-medium leading-[0.84] tracking-[-0.065em] text-white">
+        <h1 className="max-w-5xl font-display text-[clamp(4rem,9vw,9.5rem)] leading-[0.84] tracking-[-0.04em] text-white">
           Designed,
           <br />
           installed,

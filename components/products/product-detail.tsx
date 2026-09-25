@@ -56,11 +56,11 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="container-site relative z-10 flex min-h-[92svh] flex-col">
           {/* Top technical bar */}
           <div className="flex items-center justify-between border-b border-white/10 py-5">
-            <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/45">
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-white/45">
               WOWTHERM
             </span>
 
-            <span className="text-[10px] uppercase tracking-[0.22em] text-copper-400">
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-400">
               Product / {product.category}
             </span>
           </div>
@@ -71,14 +71,14 @@ export function ProductDetail({ product }: { product: Product }) {
               <Reveal>
                 <div className="mb-7 flex items-center gap-3">
                   <span className="h-px w-10 bg-copper-400" />
-                  <span className="text-[11px] font-medium uppercase tracking-[0.24em] text-copper-400">
+                  <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-copper-400">
                     {product.category}
                   </span>
                 </div>
               </Reveal>
 
               <Reveal delay={0.08}>
-                <h1 className="max-w-3xl font-display text-[clamp(3.4rem,7vw,7.5rem)] font-medium leading-[0.88] tracking-[-0.055em] text-white">
+                <h1 className="max-w-3xl font-display text-[clamp(3.4rem,7vw,7.5rem)] leading-[0.88] tracking-[-0.04em] text-white">
                   {product.name}
                 </h1>
               </Reveal>
@@ -133,14 +133,14 @@ export function ProductDetail({ product }: { product: Product }) {
 
                 {/* Technical corner */}
                 <div className="absolute left-5 top-5 border-l border-t border-copper-400/60 p-3">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/60">
                     Engineered warmth
                   </span>
                 </div>
 
                 <div className="absolute bottom-5 right-5 flex items-center gap-2">
                   <span className="size-1.5 rounded-full bg-copper-400" />
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/60">
                     Product / 01
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 key={number}
                 className="border-white/10 py-3 first:border-0 md:border-l md:px-6 md:first:border-l"
               >
-                <p className="text-[9px] uppercase tracking-[0.2em] text-white/30">
+                <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">
                   {number} / {label}
                 </p>
                 <p className="mt-2 text-xs text-white/65">{value}</p>
@@ -191,7 +191,7 @@ export function ProductDetail({ product }: { product: Product }) {
               <div>
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-copper-500" />
-                  <span className="text-[10px] font-medium uppercase tracking-[0.24em] text-copper-600">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-copper-600">
                     01 / Overview
                   </span>
                 </div>
@@ -209,7 +209,7 @@ export function ProductDetail({ product }: { product: Product }) {
                   <p
                     className={
                       index === 0
-                        ? "font-display text-[clamp(2rem,4vw,4rem)] leading-[1.08] tracking-[-0.035em] text-charcoal-900"
+                        ? "font-display text-[clamp(2rem,4vw,4rem)] leading-[1.08] tracking-[-0.025em] text-charcoal-900"
                         : "mt-8 max-w-3xl text-[1rem] leading-8 text-charcoal-500 md:text-[1.1rem]"
                     }
                   >
@@ -230,7 +230,7 @@ export function ProductDetail({ product }: { product: Product }) {
           <div className="container-site">
             <div className="mb-8 flex items-end justify-between border-b border-white/10 pb-5">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.24em] text-copper-400">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-400">
                   02 / In detail
                 </p>
                 <h2 className="mt-3 font-display text-3xl tracking-[-0.03em] text-white md:text-5xl">
@@ -278,7 +278,7 @@ export function ProductDetail({ product }: { product: Product }) {
 
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/45 via-transparent to-transparent opacity-60" />
 
-                    <span className="absolute bottom-4 left-4 text-[9px] uppercase tracking-[0.2em] text-white/60">
+                    <span className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-[0.12em] text-white/60">
                       Detail / 0{index + 2}
                     </span>
                   </motion.div>
@@ -304,12 +304,12 @@ export function ProductDetail({ product }: { product: Product }) {
               <div className="lg:sticky lg:top-28 lg:self-start">
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-copper-500" />
-                  <span className="text-[10px] font-medium uppercase tracking-[0.24em] text-copper-600">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-copper-600">
                     03 / Why it matters
                   </span>
                 </div>
 
-                <h2 className="mt-7 max-w-md font-display text-[clamp(2.8rem,5vw,5rem)] leading-[0.95] tracking-[-0.045em] text-charcoal-950">
+                <h2 className="mt-7 max-w-md font-display text-[clamp(2.8rem,5vw,5rem)] leading-[0.95] tracking-[-0.03em] text-charcoal-950">
                   Details that make the difference.
                 </h2>
               </div>
@@ -360,12 +360,12 @@ export function ProductDetail({ product }: { product: Product }) {
               <div>
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-copper-500" />
-                  <span className="text-[10px] font-medium uppercase tracking-[0.24em] text-copper-600">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-copper-600">
                     04 / Specifications
                   </span>
                 </div>
 
-                <h2 className="mt-7 font-display text-[clamp(2.5rem,4.5vw,4.5rem)] leading-[0.95] tracking-[-0.045em] text-charcoal-950">
+                <h2 className="mt-7 font-display text-[clamp(2.5rem,4.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em] text-charcoal-950">
                   The technical side of warmth.
                 </h2>
               </div>
@@ -443,7 +443,7 @@ export function ProductDetail({ product }: { product: Product }) {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.055em] text-white">
+            <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(3rem,7vw,7rem)] leading-[0.9] tracking-[-0.04em] text-white">
               Warmth starts
               <br />
               <span className="text-copper-400">with the right system.</span>

@@ -352,7 +352,7 @@ export function TechnicalDrawing({
             textAnchor="middle"
             fill="rgba(180,165,140,0.28)"
             fontSize="7"
-            fontFamily="var(--font-sans)"
+            fontFamily="var(--font-mono)"
             letterSpacing="0.08em"
           >
             4200mm
@@ -393,7 +393,7 @@ export function TechnicalDrawing({
             y={H / 2 + 3}
             fill="rgba(180,165,140,0.28)"
             fontSize="7"
-            fontFamily="var(--font-sans)"
+            fontFamily="var(--font-mono)"
             letterSpacing="0.08em"
           >
             3150mm
@@ -434,7 +434,7 @@ export function TechnicalDrawing({
             y={PAD + CABLE_SG * 1.5 + 2}
             fill="rgba(193,101,46,0.35)"
             fontSize="6.5"
-            fontFamily="var(--font-sans)"
+            fontFamily="var(--font-mono)"
             letterSpacing="0.06em"
           >
             75mm
@@ -448,7 +448,7 @@ export function TechnicalDrawing({
           textAnchor="middle"
           fill="rgba(180,165,140,0.18)"
           fontSize="7.5"
-          fontFamily="var(--font-sans)"
+          fontFamily="var(--font-mono)"
           letterSpacing="0.22em"
           opacity={drawProgress > 0.35 ? 1 : 0}
           style={{ transition: "opacity 0.5s ease-out" }}
@@ -463,7 +463,7 @@ export function TechnicalDrawing({
           textAnchor="middle"
           fill="rgba(180,165,140,0.15)"
           fontSize="6.5"
-          fontFamily="var(--font-sans)"
+          fontFamily="var(--font-mono)"
           letterSpacing="0.15em"
           opacity={drawProgress > 0.5 ? 1 : 0}
           style={{ transition: "opacity 0.5s ease-out" }}

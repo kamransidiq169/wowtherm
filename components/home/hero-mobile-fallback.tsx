@@ -51,7 +51,7 @@ export function HeroMobileFallback() {
       <div className="container-site relative z-10 flex flex-1 flex-col justify-center pb-4 pt-24 md:pt-28">
         <motion.p
           {...enter(0)}
-          className="mb-6 font-sans text-[11px] font-medium tracking-[0.25em] text-copper-400 uppercase"
+          className="mb-6 font-mono text-[11px] font-medium tracking-[0.14em] text-copper-400 uppercase"
         >
           PRECISION HEATING TECHNOLOGY
         </motion.p>
@@ -59,11 +59,11 @@ export function HeroMobileFallback() {
         {/* WARMTH — oversized display */}
         <motion.div
           {...enter(0.1)}
-          className="font-display font-medium text-white"
+          className="font-display text-white"
           style={{
             fontSize: "clamp(3.5rem, 2.5rem + 6vw, 7rem)",
             lineHeight: 0.88,
-            letterSpacing: "-0.045em",
+            letterSpacing: "-0.025em",
           }}
         >
           WARMTH
@@ -72,11 +72,11 @@ export function HeroMobileFallback() {
         {/* ENGINEERED. */}
         <motion.div
           {...enter(0.2)}
-          className="ml-[8%] font-display font-medium text-white/85"
+          className="ml-[8%] font-display text-white/85"
           style={{
-            fontSize: "clamp(2.5rem, 2rem + 4vw, 4.5rem)",
+            fontSize: "clamp(2.25rem, 1.5rem + 4vw, 4.5rem)",
             lineHeight: 0.95,
-            letterSpacing: "-0.03em",
+            letterSpacing: "-0.02em",
           }}
         >
           ENGINEERED.
@@ -85,7 +85,7 @@ export function HeroMobileFallback() {
         {/* Supporting copy */}
         <motion.div {...enter(0.35)} className="mt-8">
           <span className="mb-4 block h-px w-12 bg-copper-500/40" />
-          <p className="max-w-sm font-sans text-sm leading-relaxed text-white/45">
+          <p          className="max-w-sm text-sm leading-relaxed text-white/45">
             Beautiful floors above.
             <br />
             Precision engineering beneath.
@@ -96,7 +96,7 @@ export function HeroMobileFallback() {
         <motion.div {...enter(0.45)} className="mt-8">
           <Link
             href="/products"
-            className="inline-flex items-center gap-3 border-b border-white/20 pb-1 font-sans text-xs font-medium tracking-[0.15em] text-white/50 uppercase transition-colors hover:border-white/40 hover:text-white/80"
+            className="inline-flex items-center gap-3 border-b border-white/20 pb-1 text-xs font-medium tracking-[0.15em] text-white/50 uppercase transition-colors hover:border-white/40 hover:text-white/80"
           >
             EXPLORE HEATING SYSTEMS <span>→</span>
           </Link>
@@ -118,7 +118,7 @@ export function HeroMobileFallback() {
         aria-label="Scroll to explore"
         className="container-site relative z-20 flex flex-col items-center gap-3 pb-8 text-white/50 transition-colors hover:text-white"
       >
-        <span className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase">
+        <span className="font-mono text-[10px] font-medium tracking-[0.14em] uppercase">
           Scroll
         </span>
         <span className="flex size-8 items-center justify-center rounded-full border border-white/25">

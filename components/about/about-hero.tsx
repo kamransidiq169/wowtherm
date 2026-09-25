@@ -50,7 +50,7 @@ export function AboutHero() {
       {/* Scroll cue */}
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
         <div className="flex flex-col items-center gap-2 text-white/30">
-          <span className="text-[10px] font-medium tracking-[0.25em] uppercase font-sans">
+          <span className="text-[10px] font-medium tracking-[0.14em] uppercase font-mono">
             Scroll
           </span>
           <span className="block h-8 w-px bg-white/20" />

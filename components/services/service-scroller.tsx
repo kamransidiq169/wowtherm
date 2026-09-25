@@ -238,7 +238,7 @@ function ServiceStage({
       <motion.div
         style={{ y: numberY }}
         aria-hidden
-        className="pointer-events-none absolute right-[-2vw] top-[8%] select-none font-display text-[clamp(9rem,24vw,25rem)] leading-none tracking-[-0.12em] text-copper-500/[0.055]"
+        className="pointer-events-none absolute right-[-2vw] top-[8%] select-none font-display text-[clamp(9rem,24vw,25rem)] leading-none tracking-[-0.06em] text-copper-500/[0.055]"
       >
         {String(index + 1).padStart(2, "0")}
       </motion.div>
@@ -261,8 +261,7 @@ function ServiceStage({
         ===================================================== */}
 
         <div className="hidden border-r border-charcoal-950/[0.08] lg:block">
-          <div className="sticky top-32 flex flex-col items-center">
-            <span className="font-display text-lg text-copper-600">
+          <div className="sticky top-32 flex flex-col items-center">              <span className="font-mono text-lg text-copper-600">
               {String(index + 1).padStart(2, "0")}
             </span>
 
@@ -294,7 +293,7 @@ function ServiceStage({
 
               <span className="h-px w-12 bg-copper-500/35" />
 
-              <span className="text-[9px] uppercase tracking-[0.24em] text-charcoal-950/35">
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-950/35">
                 {SERVICE_TYPES[index] ?? "Service"}
               </span>
             </div>
@@ -311,7 +310,7 @@ function ServiceStage({
                   duration: 0.7,
                   ease: EASE,
                 }}
-                className="max-w-[850px] font-display text-[clamp(3.4rem,7vw,8rem)] font-medium leading-[0.86] tracking-[-0.065em] text-charcoal-950"
+                className="max-w-[850px] font-display text-[clamp(3.4rem,7vw,8rem)] leading-[0.86] tracking-[-0.04em] text-charcoal-950"
               >
                 {service.title}
               </motion.h3>
@@ -388,7 +387,7 @@ function ServiceStage({
               href={`#${service.id}`}
               className="group/link mt-12 inline-flex items-center gap-5"
             >
-              <span className="relative text-[9px] font-medium uppercase tracking-[0.24em] text-charcoal-950/55">
+              <span className="relative font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-charcoal-950/55">
                 Explore this service
 
                 <span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-copper-500 transition-transform duration-500 group-hover/link:scale-x-100" />
@@ -415,11 +414,9 @@ function ServiceStage({
               <Circle
                 className="size-2 fill-copper-500 text-copper-500"
                 aria-hidden
-              />
-
-              <span className="text-[8px] uppercase tracking-[0.28em] text-charcoal-950/35">
-                Specification
-              </span>
+              />                <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/35">
+                  Specification
+                </span>
             </div>
 
             {/* rule */}
@@ -431,7 +428,7 @@ function ServiceStage({
             </div>
 
             {/* service label */}
-            <p className="mt-8 text-[9px] uppercase tracking-[0.24em] text-copper-600">
+            <p className="font-mono mt-8 text-[9px] uppercase tracking-[0.12em] text-copper-600">
               {SERVICE_CODES[index]}
             </p>
 
@@ -442,32 +439,32 @@ function ServiceStage({
             {/* technical rows */}
             <div className="mt-10 border-t border-charcoal-950/[0.10]">
               <div className="flex items-center justify-between border-b border-charcoal-950/[0.08] py-4">
-                <span className="text-[8px] uppercase tracking-[0.2em] text-charcoal-950/30">
+                <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/30">
                   System
                 </span>
 
-                <span className="text-[10px] uppercase tracking-[0.12em] text-charcoal-950/60">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-charcoal-950/60">
                   WOWTHERM
                 </span>
               </div>
 
               <div className="flex items-center justify-between border-b border-charcoal-950/[0.08] py-4">
-                <span className="text-[8px] uppercase tracking-[0.2em] text-charcoal-950/30">
+                <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/30">
                   Stage
                 </span>
 
-                <span className="text-[10px] uppercase tracking-[0.12em] text-copper-600">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-copper-600">
                   {String(index + 1).padStart(2, "0")} /{" "}
                   {String(total).padStart(2, "0")}
                 </span>
               </div>
 
               <div className="flex items-center justify-between border-b border-charcoal-950/[0.08] py-4">
-                <span className="text-[8px] uppercase tracking-[0.2em] text-charcoal-950/30">
+                <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/30">
                   Process
                 </span>
 
-                <span className="text-[10px] uppercase tracking-[0.12em] text-charcoal-950/60">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-charcoal-950/60">
                   {SERVICE_TYPES[index] ?? "Service"}
                 </span>
               </div>
@@ -553,7 +550,7 @@ export function ServiceScroller({
         <div className="grid gap-12 lg:grid-cols-[1fr_1.8fr] lg:gap-20">
           {/* eyebrow */}
           <div className="flex items-start gap-4">
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-copper-600">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-600">
               04
             </span>
 
@@ -561,7 +558,7 @@ export function ServiceScroller({
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-copper-500" />
 
-                <span className="text-[9px] font-medium uppercase tracking-[0.25em] text-charcoal-950/40">
+                <span className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-charcoal-950/40">
                   Our services
                 </span>
               </div>
@@ -574,7 +571,7 @@ export function ServiceScroller({
 
           {/* heading */}
           <div>
-            <h2 className="max-w-[1050px] font-display text-[clamp(3.5rem,7vw,8.5rem)] font-medium leading-[0.84] tracking-[-0.07em] text-charcoal-950">
+            <h2 className="max-w-[1050px] font-display text-[clamp(3.5rem,7vw,8.5rem)] leading-[0.84] tracking-[-0.04em] text-charcoal-950">
               Warmth,
               <br />
               <span className="text-copper-500/75">properly</span> engineered.
@@ -621,13 +618,13 @@ export function ServiceScroller({
               aria-hidden
             />
 
-            <span className="text-[9px] uppercase tracking-[0.24em] text-charcoal-950/35">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-950/35">
               End to end
             </span>
           </div>
 
           <div>
-            <p className="max-w-[900px] font-display text-[clamp(2.4rem,5vw,5.8rem)] leading-[0.92] tracking-[-0.055em] text-charcoal-950">
+            <p className="max-w-[900px] font-display text-[clamp(2.4rem,5vw,5.8rem)] leading-[0.92] tracking-[-0.035em] text-charcoal-950">
               One system.
               <br />
               <span className="text-copper-500/70">
@@ -642,7 +639,7 @@ export function ServiceScroller({
                 aria-hidden
               />
 
-              <span className="text-[9px] uppercase tracking-[0.24em] text-charcoal-950/35">
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-950/35">
                 Designed for the room. Built for the years ahead.
               </span>
             </div>

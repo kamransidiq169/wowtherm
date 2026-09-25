@@ -99,7 +99,7 @@ export function PageHero({
       <div className="container-site relative z-10">
         <motion.p
           {...enter(0)}
-          className="text-xs font-semibold tracking-[0.3em] text-copper-500 uppercase"
+          className="font-mono text-[10px] tracking-[0.14em] text-copper-500 uppercase"
         >
           {eyebrow}
         </motion.p>
@@ -114,7 +114,7 @@ export function PageHero({
 
         <motion.h1
           {...enter(0.14)}
-          className="mt-6 max-w-2xl font-serif text-5xl leading-[1.15] text-white md:text-6xl lg:text-[3.4rem]"
+          className="mt-6 max-w-2xl font-display text-5xl leading-[1.15] text-white md:text-6xl lg:text-[3.4rem]"
         >
           {title}
         </motion.h1>

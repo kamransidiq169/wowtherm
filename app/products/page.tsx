@@ -106,13 +106,13 @@ export default function ProductsPage() {
           {/* top metadata */}
           <Reveal>
             <div className="flex items-center gap-4">
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-copper-400">
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-400">
                 05
               </span>
 
               <span className="h-px w-10 bg-copper-500/60" />
 
-              <span className="text-[9px] font-medium uppercase tracking-[0.28em] text-white/40">
+              <span className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-white/40">
                 Product catalogue
               </span>
             </div>
@@ -121,7 +121,7 @@ export default function ProductsPage() {
           {/* main heading */}
           <div className="relative mt-20">
             <Reveal delay={0.08}>
-              <h1 className="max-w-[1150px] font-display text-[clamp(4rem,9vw,10.5rem)] font-medium leading-[0.82] tracking-[-0.075em]">
+              <h1 className="max-w-[1150px] font-display text-[clamp(3.75rem,9vw,10.5rem)] leading-[0.82] tracking-[-0.05em] sm:text-[clamp(4rem,9vw,10.5rem)]">
                 Engineered
                 <br />
                 <span className="text-copper-400/90">beneath.</span>
@@ -146,7 +146,7 @@ export default function ProductsPage() {
           {/* bottom information */}
           <Reveal delay={0.3}>
             <div className="mt-20 flex flex-col justify-between gap-6 border-t border-white/[0.10] pt-5 md:flex-row md:items-center">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-white/30">
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">
                 Electric / Hydronic / Controls / Insulation
               </span>
 
@@ -157,7 +157,7 @@ export default function ProductsPage() {
                   aria-hidden
                 />
 
-                <span className="text-[9px] uppercase tracking-[0.24em] text-white/30">
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">
                   Explore the collection
                 </span>
               </div>
@@ -200,7 +200,7 @@ export default function ProductsPage() {
                   <div className="flex items-center gap-3">
                     <span className="h-px w-8 bg-copper-500" />
 
-                    <span className="text-[9px] uppercase tracking-[0.26em] text-charcoal-950/35">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-950/35">
                       The collection
                     </span>
                   </div>
@@ -216,7 +216,7 @@ export default function ProductsPage() {
             {/* catalogue heading */}
             <Reveal delay={0.1}>
               <div>
-                <h2 className="max-w-[900px] font-display text-[clamp(3rem,6vw,7rem)] font-medium leading-[0.86] tracking-[-0.065em]">
+                <h2 className="max-w-[900px] font-display text-[clamp(3rem,6vw,7rem)] leading-[0.86] tracking-[-0.04em]">
                   Every layer has
                   <br />
                   <span className="text-copper-500/75">
@@ -309,7 +309,7 @@ export default function ProductsPage() {
                       <span
                         aria-hidden
                         className={cn(
-                          "pointer-events-none absolute -top-20 select-none font-display text-[clamp(8rem,15vw,14rem)] leading-none tracking-[-0.12em] text-copper-500/[0.055]",
+                          "pointer-events-none absolute -top-20 select-none font-display text-[clamp(8rem,15vw,14rem)] leading-none tracking-[-0.06em] text-copper-500/[0.055]",
                           reverse ? "right-0" : "left-0",
                         )}
                       >
@@ -324,13 +324,13 @@ export default function ProductsPage() {
 
                         <span className="h-px w-8 bg-copper-500/60" />
 
-                        <span className="text-[9px] uppercase tracking-[0.24em] text-charcoal-950/35">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-charcoal-950/35">
                           {product.category}
                         </span>
                       </div>
 
                       {/* product name */}
-                      <h3 className="relative mt-8 max-w-[680px] font-display text-[clamp(2.8rem,5vw,6rem)] font-medium leading-[0.88] tracking-[-0.06em] text-charcoal-950">
+                      <h3 className="relative mt-8 max-w-[680px] font-display text-[clamp(2.8rem,5vw,6rem)] leading-[0.88] tracking-[-0.04em] text-charcoal-950">
                         {product.name}
                       </h3>
 
@@ -342,21 +342,21 @@ export default function ProductsPage() {
                       {/* specification line */}
                       <div className="relative mt-12 max-w-[520px] border-t border-charcoal-950/[0.10]">
                         <div className="flex items-center justify-between py-5">
-                          <span className="text-[8px] uppercase tracking-[0.22em] text-charcoal-950/30">
+                          <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/30">
                             System
                           </span>
 
-                          <span className="text-[9px] uppercase tracking-[0.14em] text-charcoal-950/55">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal-950/55">
                             WOWTHERM
                           </span>
                         </div>
 
                         <div className="flex items-center justify-between border-t border-charcoal-950/[0.08] py-5">
-                          <span className="text-[8px] uppercase tracking-[0.22em] text-charcoal-950/30">
+                          <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-charcoal-950/30">
                             Application
                           </span>
 
-                          <span className="text-right text-[9px] uppercase tracking-[0.14em] text-charcoal-950/55">
+                          <span className="text-right font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal-950/55">
                             {product.category}
                           </span>
                         </div>
@@ -367,7 +367,7 @@ export default function ProductsPage() {
                         href={`/products/${product.slug}`}
                         className="group/link relative mt-10 inline-flex items-center gap-5"
                       >
-                        <span className="relative text-[9px] font-medium uppercase tracking-[0.24em] text-charcoal-950/60">
+                        <span className="relative font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-charcoal-950/60">
                           View product
 
                           <span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-copper-500 transition-transform duration-500 group-hover/link:scale-x-100" />
@@ -442,7 +442,7 @@ export default function ProductsPage() {
                   aria-hidden
                 />
 
-                <span className="text-[9px] uppercase tracking-[0.25em] text-white/30">
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">
                   Beyond the product
                 </span>
               </div>
@@ -450,7 +450,7 @@ export default function ProductsPage() {
 
             <div>
               <Reveal delay={0.08}>
-                <h2 className="max-w-[1000px] font-display text-[clamp(3rem,6vw,7rem)] font-medium leading-[0.86] tracking-[-0.065em]">
+                <h2 className="max-w-[1000px] font-display text-[clamp(3rem,6vw,7rem)] leading-[0.86] tracking-[-0.04em]">
                   The right system
                   <br />
                   starts with the
@@ -478,7 +478,7 @@ export default function ProductsPage() {
                   href="/contact"
                   className="group mt-12 inline-flex items-center gap-5"
                 >
-                  <span className="text-[9px] font-medium uppercase tracking-[0.24em] text-white/65">
+                  <span className="font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-white/65">
                     Discuss your project
                   </span>
 

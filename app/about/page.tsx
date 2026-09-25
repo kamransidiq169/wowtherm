@@ -220,7 +220,7 @@ function AboutHero() {
             ================================================== */}
 
             <Reveal delay={0.12}>
-              <h1 className="max-w-[1100px] font-display text-[clamp(4rem,10vw,10.5rem)] font-medium leading-[0.78] tracking-[-0.065em]">
+              <h1 className="max-w-[1100px] font-display text-[clamp(4rem,10vw,10.5rem)] leading-[0.82] tracking-[-0.04em] sm:text-[clamp(4.5rem,9vw,10.5rem)]">
                 <span className="block text-white">
                   Indian
                 </span>
@@ -229,7 +229,7 @@ function AboutHero() {
                   winters
                 </span>
 
-                <span className="relative mt-2 block font-serif italic tracking-[-0.055em] text-copper-400">
+                <span className="font-accent relative mt-2 block text-[0.82em] leading-[1.1] text-copper-400">
                   end here.
                 </span>
               </h1>
@@ -260,7 +260,7 @@ function AboutHero() {
           >
             <div className="border-l border-white/15 pl-5">
               <div className="mb-5 flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-[0.25em] text-white/40">
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                   System / 01
                 </span>
 
@@ -276,7 +276,7 @@ function AboutHero() {
                     Invisible
                   </p>
 
-                  <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                     Architecture
                   </p>
                 </div>
@@ -288,7 +288,7 @@ function AboutHero() {
                     Radiant
                   </p>
 
-                  <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                     Comfort
                   </p>
                 </div>
@@ -316,7 +316,7 @@ function AboutHero() {
                   12,500+
                 </p>
 
-                <p className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                   Homes warmed
                 </p>
               </div>
@@ -335,7 +335,7 @@ function AboutHero() {
                   23 states
                 </p>
 
-                <p className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                   Across India
                 </p>
               </div>
@@ -354,7 +354,7 @@ function AboutHero() {
                   Since 2012
                 </p>
 
-                <p className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-white/40">
                   Engineering warmth
                 </p>
               </div>
@@ -580,7 +580,7 @@ export default function AboutPage() {
       <Reveal>
         <div className="flex items-start gap-5">
 
-          <span className="mt-1 font-mono text-[10px] tracking-[0.25em] text-copper-400/70">
+          <span className="mt-1 font-mono text-[10px] tracking-[0.12em] text-copper-400/70">
             02
           </span>
 
@@ -610,7 +610,7 @@ export default function AboutPage() {
       <Reveal delay={0.08}>
         <div>
 
-          <h2 className="max-w-4xl font-display text-[clamp(3rem,6.5vw,7rem)] font-medium leading-[0.88] tracking-[-0.055em]">
+          <h2 className="max-w-4xl font-display text-[clamp(3rem,6.5vw,7rem)] leading-[0.88] tracking-[-0.04em]">
 
             What we{" "}
 
@@ -738,9 +738,8 @@ export default function AboutPage() {
                 className="
                   font-display
                   text-[clamp(1.5rem,2.2vw,2.2rem)]
-                  font-medium
                   leading-none
-                  tracking-[-0.025em]
+                  tracking-[-0.02em]
                   text-white
                   transition-transform duration-500
                   group-hover:translate-x-1
@@ -856,9 +855,7 @@ export default function AboutPage() {
 
         <div className="flex items-center gap-4">
 
-          <span className="h-px w-12 bg-copper-400/70" />
-
-          <span className="text-[9px] uppercase tracking-[0.28em] text-copper-400/45">
+          <span className="h-px w-12 bg-copper-400/70" />              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-copper-400/45">
             Engineered for India
           </span>
 

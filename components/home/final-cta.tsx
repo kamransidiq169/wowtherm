@@ -52,7 +52,7 @@ export function FinalCta() {
         transition={{ duration: 0.8, ease: EASE }}
         className="container-site relative z-10 text-center"
       >
-        <h2 className="mx-auto max-w-3xl font-serif text-4xl leading-[1.1] text-white md:text-6xl">
+        <h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.1] text-white md:text-6xl">
           Let&apos;s design the warmth
           <br />
           into your next space.

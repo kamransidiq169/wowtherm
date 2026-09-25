@@ -57,8 +57,19 @@
 
   --color-danger: #b3402a;
 
-  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  /* ----------------------------------------------------------------
+     WOWTHERM TYPOGRAPHY TOKENS
+
+     display  → Inria Serif     (dominant: H1–H3, editorial statements)
+     body     → Google Sans     (functional: paragraphs, UI, buttons)
+     accent   → Kaushan Script  (rare: orange emotional accent words)
+     mono     → Raleway         (supporting: labels, technical micro-copy)
+     ---------------------------------------------------------------- */
+  --font-display: var(--font-inria-serif), ui-serif, Georgia, serif;
+  --font-body: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-accent: var(--font-kaushan-script), cursive;
 
   --radius-card: 1rem;
   --radius-field: 0.625rem;
@@ -102,16 +113,22 @@
   body {
     background-color: var(--color-ivory-100);
     color: var(--color-charcoal-900);
-    font-family: var(--font-sans);
-    line-height: 1.6;
+    font-family: var(--font-body);
+    line-height: 1.65;
     overflow-x: clip;
+    font-optical-sizing: auto;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
     line-height: 1.1;
-    font-weight: 500;
+    font-weight: 400;
+    text-wrap: balance;
   }
 
   ::selection {
@@ -168,85 +185,129 @@
   }
 }
 
-/* Premium typography scale */
+/* ─────────────────────────────────────────────────────────────────
+   WOWTHERM PREMIUM TYPOGRAPHY SCALE
+   ─────────────────────────────────────────────────────────────────
+   DISPLAY  →  Inria Serif
+   BODY     →  Google Sans
+   TECHNICAL →  Raleway
+   ACCENT   →  Kaushan Script (orange editorial accents only)
+
+   Scale is intentionally editorial — large, spacious, and
+   architectural. Inria Serif carries the hierarchy at weight 400;
+   contrast comes from scale and whitespace, not heavy weights.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Hero Display — the largest typographic moment */
 @utility text-display-xl {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 2.5rem + 4vw, 6rem);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  font-weight: 500;
+  font-size: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  text-wrap: balance;
 }
 
+/* H1 / Major section heading */
 @utility text-display-lg {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 1.8rem + 2.5vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  font-weight: 500;
+  font-size: clamp(2.75rem, 2rem + 3.5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  text-wrap: balance;
 }
 
+/* H2 / Secondary section heading */
 @utility text-display-md {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 1.5rem + 1.5vw, 2.75rem);
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
-  font-weight: 500;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  text-wrap: balance;
 }
 
+/* H3 / Tertiary heading */
 @utility text-heading-xl {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  font-weight: 500;
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2.5rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  text-wrap: balance;
 }
 
+/* H4 / Card heading */
 @utility text-heading-lg {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
   line-height: 1.2;
   letter-spacing: -0.01em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
+/* H5 / Small heading */
 @utility text-heading-md {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 1rem + 0.5vw, 1.375rem);
   line-height: 1.3;
-  letter-spacing: -0.005em;
-  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-weight: 400;
 }
 
+/* Body Large — editorial lead paragraphs */
 @utility text-body-lg {
+  font-family: var(--font-body);
   font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+/* Body — standard reading text */
+@utility text-body-md {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
   line-height: 1.65;
   letter-spacing: 0;
 }
 
-@utility text-body-md {
-  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
-  line-height: 1.6;
-  letter-spacing: 0;
-}
-
+/* Body Small — captions, supporting text */
 @utility text-body-sm {
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.55;
   letter-spacing: 0;
 }
 
-@utility text-eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  line-height: 1.2;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
+/* Lead — paragraph lead text used in section headings */
+@utility text-lead {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.65;
+  letter-spacing: 0;
 }
 
+/* Eyebrow — technical labels, section markers (Raleway) */
+@utility text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* The `--font-accent` token above auto-generates a `font-accent`
+   utility (font-family only) for rare Kaushan Script editorial
+   accents — pair it with a copper text color. Never use it for
+   paragraphs, navigation, buttons or technical copy. */
+
+/* Caption — small supporting text */
 @utility text-caption {
+  font-family: var(--font-body);
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.45;
   letter-spacing: 0.01em;
 }
 

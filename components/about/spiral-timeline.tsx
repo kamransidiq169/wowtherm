@@ -318,7 +318,7 @@ export function SpiralTimeline({
           <div className="pointer-events-none absolute inset-y-0 right-6 hidden flex-col items-center justify-center gap-3 md:flex lg:right-10">
             <span
               ref={counterRef}
-              className="font-display text-sm text-copper-600 tabular-nums"
+              className="font-mono text-sm text-copper-600 tabular-nums"
             >
               01
             </span>
