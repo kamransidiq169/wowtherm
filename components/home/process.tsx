@@ -1,374 +1,1147 @@
-
-
 "use client";
 
-import { useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
+
 import {
   motion,
+  useMotionValueEvent,
   useScroll,
   useTransform,
-  useMotionValueEvent,
   type MotionValue,
 } from "framer-motion";
 
-const steps = [
+import ProcessHeatingSystem from "./ProcessHeatingSystem";
+
+/* ============================================================
+   PROCESS DATA
+============================================================ */
+
+const STEPS = [
   {
     number: "01",
+    eyebrow: "DISCOVERY",
     title: "Consultation",
     description:
-      "We begin with understanding your space, your vision, and how you want to feel in it.",
+      "We begin by understanding the property, the architecture and the comfort requirements that will shape the system.",
+    meta: "BRIEF  /  REQUIREMENTS  /  DIRECTION",
   },
   {
     number: "02",
+    eyebrow: "SURVEY",
     title: "Site Assessment",
     description:
-      "Our engineers survey your space, measure heat loss, and identify the optimal system configuration.",
+      "The site is studied in detail to understand floor construction, insulation, zones and installation conditions.",
+    meta: "SURVEY  /  FLOOR BUILD-UP  /  ZONING",
   },
   {
     number: "03",
+    eyebrow: "ENGINEERING",
     title: "System Design",
     description:
-      "Detailed CAD layouts, heat-loss calculations, and material specifications — approved before any work begins.",
+      "Site information is translated into a precise heating layout with considered circuits, spacing, controls and heat distribution.",
+    meta: "LAYOUT  /  CIRCUITS  /  CONTROLS",
   },
   {
     number: "04",
+    eyebrow: "EXECUTION",
     title: "Installation",
     description:
-      "Our certified installers work with precision, following the approved design with minimal disruption.",
+      "The designed system is installed with precision, from routing and spacing through to manifold connections and floor integration.",
+    meta: "PIPEWORK  /  MANIFOLD  /  INTEGRATION",
   },
   {
     number: "05",
+    eyebrow: "HANDOVER",
     title: "Commissioning",
     description:
-      "Every circuit is tested, every zone is calibrated, and the system is handover-ready.",
+      "The completed system is tested, balanced and commissioned so every zone is ready to perform as intended.",
+    meta: "TESTING  /  BALANCING  /  HANDOVER",
   },
+] as const;
+
+/* ============================================================
+   TIMELINE
+============================================================ */
+
+const HEADING_START = 0.025;
+const HEADING_END = 0.16;
+
+const PROCESS_START = 0.19;
+const PROCESS_END = 0.94;
+
+const STEP_SLOT =
+  (PROCESS_END - PROCESS_START) / STEPS.length;
+
+/* ============================================================
+   COLORS
+============================================================ */
+
+const COPPER = "#C45A19";
+const COPPER_BRIGHT = "#E87528";
+
+/* ============================================================
+   AUDIO
+============================================================ */
+
+let audioContext: AudioContext | null = null;
+
+const HEADING_NOTES = [
+  220,
+  246.94,
+  293.66,
+  329.63,
+  369.99,
+  440,
+  493.88,
+  554.37,
+  659.25,
+  739.99,
 ];
 
-const HEADING = "OUR PROCESS";
-const OUR_LENGTH = 3; // "OUR" -> white, rest ("PROCESS") -> orange
-const WHITE_COLOR = "#FFFFFF";
-const ORANGE_COLOR = "#F97316"; // swap for your exact copper/orange token if different
-
-// ---- Scroll choreography (0 -> 1 across the whole pinned section) ----
-const HEADING_FILL_END = 0.55; // last letter has landed in place by here
-const CARDS_START = 0.14; // cards start climbing early — overlaps the heading
-const CARDS_END = 1.0;
-const CARD_STAGGER = 0.85; // 0 = fully overlapping, 1 = fully sequential
-const CARD_WINDOW_SCALE = 1.7;
-
-// Scattered, rotated floating positions for each card (desktop). Percentages
-// are relative to the stage; rotation gives the moodboard/award-wall feel.
-const CARD_LAYOUT = [
-  { top: "6%", left: "58%", rotate: -6, width: 250 },
-  { top: "14%", left: "10%", rotate: 5, width: 230 },
-  { top: "46%", left: "76%", rotate: 4, width: 250 },
-  { top: "58%", left: "16%", rotate: -7, width: 240 },
-  { top: "74%", left: "46%", rotate: 3, width: 230 },
-  { top: "30%", left: "40%", rotate: -3, width: 220 },
+const STEP_NOTES = [
+  261.63,
+  329.63,
+  392,
+  493.88,
+  587.33,
 ];
 
-// Shared threshold helper so heading letters and their chime land together.
-function getCharRange(index: number, total: number): [number, number] {
-  const start = (index / total) * HEADING_FILL_END;
-  const end = ((index + 1) / total) * HEADING_FILL_END;
-  return [start, end];
-}
-
-// Shared helper so each floating card and its "pop" sound land together.
-function getCardRange(index: number, total: number): [number, number] {
-  const span = CARDS_END - CARDS_START;
-  const perCard = span / total;
-  const start = CARDS_START + index * perCard * CARD_STAGGER;
-  const end = Math.min(start + perCard * CARD_WINDOW_SCALE, CARDS_END);
-  return [start, end];
-}
-
-/* ------------------------------------------------------------------ */
-/* Sound — letters chime in ascending pitch as OUR PROCESS lands, and  */
-/* each floating card gets a soft "pop" as it settles into place.      */
-/* ------------------------------------------------------------------ */
-let sharedAudioCtx: AudioContext | null = null;
-
-function getAudioContext(): AudioContext | null {
-  if (typeof window === "undefined") return null;
-  if (!sharedAudioCtx) {
-    const Ctx =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext: typeof AudioContext })
-        .webkitAudioContext;
-    if (!Ctx) return null;
-    sharedAudioCtx = new Ctx();
+function getAudioContext() {
+  if (typeof window === "undefined") {
+    return null;
   }
-  return sharedAudioCtx;
+
+  if (!audioContext) {
+    const AudioContextClass =
+      window.AudioContext ||
+      (
+        window as typeof window & {
+          webkitAudioContext?: typeof AudioContext;
+        }
+      ).webkitAudioContext;
+
+    if (!AudioContextClass) {
+      return null;
+    }
+
+    audioContext = new AudioContextClass();
+  }
+
+  return audioContext;
 }
 
-// One-time global unlock — browsers won't start/resume audio from a
-// scroll event alone, only from a real click/keydown/touch gesture.
-function unlockAudioContext() {
+function playTone(
+  frequency: number,
+  duration = 0.18,
+  volume = 0.025,
+) {
   const ctx = getAudioContext();
+
   if (!ctx) return;
-  if (ctx.state === "suspended") ctx.resume();
-  const buffer = ctx.createBuffer(1, 1, 22050);
-  const source = ctx.createBufferSource();
-  source.buffer = buffer;
-  source.connect(ctx.destination);
-  source.start(0);
-}
 
-if (typeof window !== "undefined") {
-  const unlock = () => {
-    unlockAudioContext();
-    window.removeEventListener("pointerdown", unlock);
-    window.removeEventListener("keydown", unlock);
-    window.removeEventListener("touchstart", unlock);
-  };
-  window.addEventListener("pointerdown", unlock);
-  window.addEventListener("keydown", unlock);
-  window.addEventListener("touchstart", unlock);
-}
+  if (ctx.state === "suspended") {
+    void ctx.resume();
+  }
 
-const CHIME_SCALE = [
-  659.25, // E5
-  783.99, // G5
-  880.0, // A5
-  1046.5, // C6
-  1174.66, // D6
-  1318.51, // E6
-  1567.98, // G6
-  1760.0, // A6
-  1975.53, // B6
-  2093.0, // C7
-];
-
-function playLetterChime(index: number) {
-  const ctx = getAudioContext();
-  if (!ctx || ctx.state !== "running") return;
-
-  const now = ctx.currentTime;
-  const freq = CHIME_SCALE[index % CHIME_SCALE.length];
-
-  const master = ctx.createGain();
-  master.gain.value = 0.045;
-  master.connect(ctx.destination);
-
-  const osc = ctx.createOscillator();
-  osc.type = "sine";
-  osc.frequency.setValueAtTime(freq * 0.97, now);
-  osc.frequency.exponentialRampToValueAtTime(freq, now + 0.035);
-
+  const oscillator = ctx.createOscillator();
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(0.65, now + 0.01);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
 
-  const filter = ctx.createBiquadFilter();
-  filter.type = "lowpass";
-  filter.frequency.value = 4500;
+  oscillator.type = "sine";
 
-  osc.connect(filter);
-  filter.connect(gain);
-  gain.connect(master);
-  osc.start(now);
-  osc.stop(now + 0.24);
+  oscillator.frequency.setValueAtTime(
+    frequency,
+    ctx.currentTime,
+  );
+
+  gain.gain.setValueAtTime(
+    0.0001,
+    ctx.currentTime,
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    volume,
+    ctx.currentTime + 0.025,
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    ctx.currentTime + duration,
+  );
+
+  oscillator.connect(gain);
+  gain.connect(ctx.destination);
+
+  oscillator.start();
+
+  oscillator.stop(
+    ctx.currentTime + duration + 0.025,
+  );
 }
 
-function playCardPop() {
-  const ctx = getAudioContext();
-  if (!ctx || ctx.state !== "running") return;
+function playHeadingChime(index: number) {
+  const note =
+    HEADING_NOTES[
+      index % HEADING_NOTES.length
+    ];
 
-  const now = ctx.currentTime;
-  const master = ctx.createGain();
-  master.gain.value = 0.06;
-  master.connect(ctx.destination);
-
-  // Warm, soft "pop" — quick pitch-rise thump, rounded with a low-pass
-  const body = ctx.createOscillator();
-  body.type = "sine";
-  body.frequency.setValueAtTime(160, now);
-  body.frequency.exponentialRampToValueAtTime(340, now + 0.05);
-  body.frequency.exponentialRampToValueAtTime(220, now + 0.11);
-
-  const bodyGain = ctx.createGain();
-  bodyGain.gain.setValueAtTime(0, now);
-  bodyGain.gain.linearRampToValueAtTime(0.75, now + 0.008);
-  bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
-
-  const bodyFilter = ctx.createBiquadFilter();
-  bodyFilter.type = "lowpass";
-  bodyFilter.frequency.value = 1400;
-
-  body.connect(bodyFilter);
-  bodyFilter.connect(bodyGain);
-  bodyGain.connect(master);
-  body.start(now);
-  body.stop(now + 0.18);
-
-  // Whisper-quiet shimmer overtone
-  const overtone = ctx.createOscillator();
-  overtone.type = "triangle";
-  overtone.frequency.setValueAtTime(980, now);
-  overtone.frequency.exponentialRampToValueAtTime(760, now + 0.09);
-
-  const overtoneGain = ctx.createGain();
-  overtoneGain.gain.setValueAtTime(0, now);
-  overtoneGain.gain.linearRampToValueAtTime(0.1, now + 0.008);
-  overtoneGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
-
-  overtone.connect(overtoneGain);
-  overtoneGain.connect(master);
-  overtone.start(now);
-  overtone.stop(now + 0.12);
+  playTone(note, 0.16, 0.022);
 }
 
-function HeadingChar({
-  char,
-  progress,
-  range,
-  color,
-}: {
-  char: string;
+function playStepChime(index: number) {
+  const note =
+    STEP_NOTES[index % STEP_NOTES.length];
+
+  playTone(note, 0.24, 0.035);
+
+  window.setTimeout(() => {
+    playTone(note * 2, 0.16, 0.012);
+  }, 55);
+}
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value));
+}
+
+function getStepRange(index: number) {
+  const start =
+    PROCESS_START + index * STEP_SLOT;
+
+  const end = start + STEP_SLOT;
+
+  return {
+    start: clamp01(start),
+    end: clamp01(end),
+  };
+}
+
+/* ============================================================
+   HEADING LETTER
+============================================================ */
+
+interface HeadingLetterProps {
+  character: string;
+  index: number;
+  total: number;
   progress: MotionValue<number>;
-  range: [number, number];
-  color: string;
-}) {
-  const y = useTransform(progress, range, [220, 0]);
-  const scale = useTransform(progress, range, [2.6, 1]);
-  const opacity = useTransform(progress, range, [0, 1]);
+}
+
+function HeadingLetter({
+  character,
+  index,
+  total,
+  progress,
+}: HeadingLetterProps) {
+  const start =
+    HEADING_START +
+    ((HEADING_END - HEADING_START) * index) /
+      total;
+
+  const end =
+    HEADING_START +
+    ((HEADING_END - HEADING_START) *
+      (index + 1)) /
+      total;
+
+  const y = useTransform(
+    progress,
+    [start, end],
+    [22, 0],
+  );
+
+  const opacity = useTransform(
+    progress,
+    [start, end],
+    [0, 1],
+  );
+
+  const scale = useTransform(
+    progress,
+    [start, end],
+    [0.97, 1],
+  );
+
+  const color = useTransform(
+    progress,
+    [HEADING_START, end],
+    [
+      index < 4
+        ? "rgba(255,255,255,0.15)"
+        : "rgba(196,90,25,0.15)",
+      index < 4 ? "#F1F1EF" : COPPER,
+    ],
+  );
+
+  if (character === " ") {
+    return (
+      <span
+        aria-hidden="true"
+        className="inline-block w-[0.25em]"
+      />
+    );
+  }
 
   return (
     <motion.span
-      style={{ y, scale, opacity, color }}
+      aria-hidden="true"
       className="inline-block"
-    >
-      {char === " " ? "\u00A0" : char}
-    </motion.span>
-  );
-}
-
-function ScrollHeading({ progress }: { progress: MotionValue<number> }) {
-  const chars = HEADING.split("");
-
-  return (
-    <h2 className="relative z-20 flex flex-wrap justify-center font-display text-3xl font-semibold uppercase leading-none tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-      {chars.map((char, i) => {
-        const range = getCharRange(i, chars.length);
-        const color = i < OUR_LENGTH ? WHITE_COLOR : ORANGE_COLOR;
-
-        return (
-          <HeadingChar
-            key={`${char}-${i}`}
-            char={char}
-            progress={progress}
-            range={range}
-            color={color}
-          />
-        );
-      })}
-    </h2>
-  );
-}
-
-function FloatingCard({
-  step,
-  index,
-  progress,
-}: {
-  step: (typeof steps)[number];
-  index: number;
-  progress: MotionValue<number>;
-}) {
-  const [start, end] = getCardRange(index, steps.length);
-  const layout = CARD_LAYOUT[index % CARD_LAYOUT.length];
-
-  const y = useTransform(progress, [start, end], [140, 0]);
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const scale = useTransform(progress, [start, end], [0.85, 1]);
-
-  return (
-    <motion.div
       style={{
         y,
         opacity,
         scale,
-        rotate: layout.rotate,
-        top: layout.top,
-        left: layout.left,
-        width: layout.width,
+        color,
       }}
-      className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col rounded-2xl border border-white/10 bg-charcoal-900 p-5 shadow-2xl"
     >
-      <div className="mb-3 flex size-9 shrink-0 items-center justify-center rounded-full bg-copper-500 text-xs font-medium text-white">
-        {step.number}
+      {character}
+    </motion.span>
+  );
+}
+
+/* ============================================================
+   MAIN HEADING
+============================================================ */
+
+function ProcessHeading({
+  progress,
+}: {
+  progress: MotionValue<number>;
+}) {
+  const heading = "OUR PROCESS";
+
+  return (
+    <div
+      className="
+        pointer-events-none
+        absolute
+        inset-x-0
+        top-[7vh]
+        z-40
+        flex
+        justify-center
+        px-6
+        md:top-[8vh]
+      "
+    >
+      <div className="text-center">
+        <div
+          className="
+            font-sans
+            text-[clamp(2.6rem,6.6vw,7.2rem)]
+            font-light
+            uppercase
+            leading-[0.84]
+            tracking-[-0.065em]
+          "
+        >
+          {heading.split("").map(
+            (character, index) => (
+              <HeadingLetter
+                key={`${character}-${index}`}
+                character={character}
+                index={index}
+                total={heading.length}
+                progress={progress}
+              />
+            ),
+          )}
+        </div>
+
+        <motion.div
+          className="
+            mx-auto
+            mt-6
+            h-px
+            w-16
+            origin-center
+            bg-[#C45A19]
+            md:mt-7
+            md:w-24
+          "
+          style={{
+            opacity: useTransform(
+              progress,
+              [HEADING_START, HEADING_END],
+              [0, 1],
+            ),
+            scaleX: useTransform(
+              progress,
+              [HEADING_START, HEADING_END],
+              [0, 1],
+            ),
+          }}
+        />
       </div>
-      <h3 className="text-base font-semibold text-white md:text-lg">
+    </div>
+  );
+}
+
+/* ============================================================
+   STEP CONTENT
+============================================================ */
+
+function ProcessStepContent({
+  index,
+  progress,
+}: {
+  index: number;
+  progress: MotionValue<number>;
+}) {
+  const step = STEPS[index];
+
+  const { start, end } =
+    getStepRange(index);
+
+  const duration = Math.max(
+    0.001,
+    end - start,
+  );
+
+  const enterStart = start;
+
+  const enterEnd = Math.min(
+    end,
+    start + duration * 0.22,
+  );
+
+  const holdStart = Math.min(
+    end,
+    start + duration * 0.32,
+  );
+
+  const exitStart = Math.min(
+    end,
+    start + duration * 0.76,
+  );
+
+  const exitEnd = Math.min(
+    1,
+    end + duration * 0.24,
+  );
+
+  /*
+    Content stays completely independent
+    from the heating mat.
+  */
+
+  const x = useTransform(
+    progress,
+    [
+      enterStart,
+      enterEnd,
+      holdStart,
+      exitStart,
+      exitEnd,
+    ],
+    [
+      110,
+      0,
+      0,
+      0,
+      -90,
+    ],
+  );
+
+  const opacity = useTransform(
+    progress,
+    [
+      enterStart,
+      enterEnd,
+      exitStart,
+      exitEnd,
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+    ],
+  );
+
+  const scale = useTransform(
+    progress,
+    [
+      enterStart,
+      enterEnd,
+      exitStart,
+      exitEnd,
+    ],
+    [
+      0.96,
+      1,
+      1,
+      0.985,
+    ],
+  );
+
+  const numberY = useTransform(
+    progress,
+    [enterStart, enterEnd],
+    [20, 0],
+  );
+
+  const lineScale = useTransform(
+    progress,
+    [enterStart, enterEnd],
+    [0, 1],
+  );
+
+  return (
+    <motion.div
+      className="
+        pointer-events-none
+        absolute
+        right-[6vw]
+        top-1/2
+        z-30
+        w-[min(31rem,30vw)]
+        -translate-y-1/2
+
+        max-md:left-6
+        max-md:right-6
+        max-md:top-auto
+        max-md:bottom-[8vh]
+        max-md:w-auto
+        max-md:translate-y-0
+      "
+      style={{
+        x,
+        opacity,
+        scale,
+      }}
+    >
+      {/* tiny category */}
+
+      <div
+        className="
+          flex
+          items-center
+          gap-3
+          font-mono
+          text-[9px]
+          uppercase
+          tracking-[0.2em]
+          text-white/35
+        "
+      >
+        <span>
+          {step.eyebrow}
+        </span>
+
+        <span className="h-px w-8 bg-white/15" />
+      </div>
+
+      {/* number */}
+
+      <motion.div
+        className="
+          mt-8
+          font-mono
+          text-[11px]
+          tracking-[0.18em]
+          text-[#C45A19]
+        "
+        style={{
+          y: numberY,
+        }}
+      >
+        {step.number}
+      </motion.div>
+
+      {/* title */}
+
+      <h2
+        className="
+          mt-3
+          font-sans
+          text-[clamp(2.7rem,4vw,5rem)]
+          font-light
+          leading-[0.88]
+          tracking-[-0.055em]
+          text-[#F1F1EF]
+        "
+      >
         {step.title}
-      </h3>
-      <p className="mt-2 text-xs leading-relaxed text-white/50 md:text-sm">
+      </h2>
+
+      {/* editorial line */}
+
+      <motion.div
+        className="
+          mt-8
+          h-px
+          w-full
+          origin-left
+          bg-[#C45A19]
+        "
+        style={{
+          scaleX: lineScale,
+        }}
+      />
+
+      {/* description */}
+
+      <p
+        className="
+          mt-6
+          max-w-[29rem]
+          font-sans
+          text-[clamp(0.88rem,0.95vw,1.02rem)]
+          font-light
+          leading-[1.6]
+          tracking-[-0.01em]
+          text-white/48
+        "
+      >
         {step.description}
       </p>
+
+      {/* technical metadata */}
+
+      <div
+        className="
+          mt-8
+          font-mono
+          text-[8px]
+          uppercase
+          tracking-[0.15em]
+          text-white/25
+        "
+      >
+        {step.meta}
+      </div>
     </motion.div>
   );
 }
 
+/* ============================================================
+   BOTTOM TIMELINE
+============================================================ */
+
+function ProcessTimeline({
+  progress,
+}: {
+  progress: MotionValue<number>;
+}) {
+  return (
+    <div
+      className="
+        pointer-events-none
+        absolute
+        bottom-[5.5vh]
+        right-[6vw]
+        z-40
+        hidden
+        md:block
+      "
+    >
+      <div className="mb-3 font-mono text-[8px] uppercase tracking-[0.18em] text-white/20">
+        Process
+      </div>
+
+      <div className="flex items-center">
+        {STEPS.map((step, index) => {
+          const { start, end } =
+            getStepRange(index);
+
+          const activeOpacity =
+            useTransform(
+              progress,
+              [start, end],
+              [0.18, 1],
+            );
+
+          const lineScale =
+            useTransform(
+              progress,
+              [start, end],
+              [0, 1],
+            );
+
+          return (
+            <div
+              key={step.number}
+              className="flex items-center"
+            >
+              <motion.span
+                className="
+                  font-mono
+                  text-[8px]
+                  tracking-[0.08em]
+                "
+                style={{
+                  opacity: activeOpacity,
+                  color: COPPER,
+                }}
+              >
+                {step.number}
+              </motion.span>
+
+              {index !==
+                STEPS.length - 1 && (
+                <div
+                  className="
+                    relative
+                    mx-3
+                    h-px
+                    w-10
+                    overflow-hidden
+                    bg-white/[0.12]
+                    lg:w-14
+                  "
+                >
+                  <motion.div
+                    className="
+                      absolute
+                      inset-y-0
+                      left-0
+                      w-full
+                      origin-left
+                      bg-[#C45A19]
+                    "
+                    style={{
+                      scaleX: lineScale,
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   PROCESS
+============================================================ */
+
 export function Process() {
-  const pinRef = useRef<HTMLDivElement>(null);
-  const firedLetters = useRef<boolean[]>(new Array(HEADING.length).fill(false));
-  const firedCards = useRef<boolean[]>(new Array(steps.length).fill(false));
+  const rootRef =
+    useRef<HTMLElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: pinRef,
-    offset: ["start start", "end end"],
-  });
+  const previousProgress =
+    useRef(0);
 
-  // Chime each heading letter as it lands, and pop each card as it
-  // settles into place — both keyed off the exact same thresholds the
-  // visuals use, so sound and motion stay perfectly synced. Resets on
-  // scroll-back so it can replay if the user scrolls up and down again.
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    HEADING.split("").forEach((_, i) => {
-      const [start, end] = getCharRange(i, HEADING.length);
-      const mid = (start + end) / 2;
+  const audioPlayed =
+    useRef<Set<string>>(new Set());
 
-      if (!firedLetters.current[i] && latest >= mid) {
-        firedLetters.current[i] = true;
-        playLetterChime(i);
-      } else if (firedLetters.current[i] && latest < start - 0.008) {
-        firedLetters.current[i] = false;
-      }
+  const { scrollYProgress } =
+    useScroll({
+      target: rootRef,
+      offset: [
+        "start start",
+        "end end",
+      ],
     });
 
-    steps.forEach((_, i) => {
-      const [start, end] = getCardRange(i, steps.length);
-      const mid = start + (end - start) * 0.4;
+  /* ==========================================================
+     AUDIO / SCROLL
+  ========================================================== */
 
-      if (!firedCards.current[i] && latest >= mid) {
-        firedCards.current[i] = true;
-        playCardPop();
-      } else if (firedCards.current[i] && latest < start - 0.008) {
-        firedCards.current[i] = false;
+  useMotionValueEvent(
+    scrollYProgress,
+    "change",
+    (latest) => {
+      const previous =
+        previousProgress.current;
+
+      /*
+        Only trigger sounds while moving DOWN.
+        When scrolling back up, thresholds are
+        cleared so they can play again.
+      */
+
+      if (latest > previous) {
+        /* heading */
+
+        const heading =
+          "OURPROCESS";
+
+        heading.split("").forEach(
+          (_, index) => {
+            const threshold =
+              HEADING_START +
+              ((HEADING_END -
+                HEADING_START) *
+                index) /
+                heading.length;
+
+            const key =
+              `heading-${index}`;
+
+            if (
+              latest >= threshold &&
+              !audioPlayed.current.has(key)
+            ) {
+              audioPlayed.current.add(key);
+
+              playHeadingChime(index);
+            }
+          },
+        );
+
+        /* steps */
+
+        STEPS.forEach(
+          (_, index) => {
+            const { start } =
+              getStepRange(index);
+
+            const key =
+              `step-${index}`;
+
+            if (
+              latest >= start &&
+              !audioPlayed.current.has(key)
+            ) {
+              audioPlayed.current.add(key);
+
+              playStepChime(index);
+            }
+          },
+        );
       }
-    });
-  });
+
+      /*
+        Reset once the user scrolls back above
+        the relevant threshold.
+      */
+
+      audioPlayed.current.forEach(
+        (key) => {
+          if (key.startsWith("heading-")) {
+            const index = Number(
+              key.replace(
+                "heading-",
+                "",
+              ),
+            );
+
+            const heading =
+              "OURPROCESS";
+
+            const threshold =
+              HEADING_START +
+              ((HEADING_END -
+                HEADING_START) *
+                index) /
+                heading.length;
+
+            if (
+              latest <
+              threshold - 0.012
+            ) {
+              audioPlayed.current.delete(
+                key,
+              );
+            }
+          }
+
+          if (key.startsWith("step-")) {
+            const index = Number(
+              key.replace(
+                "step-",
+                "",
+              ),
+            );
+
+            const { start } =
+              getStepRange(index);
+
+            if (
+              latest <
+              start - 0.012
+            ) {
+              audioPlayed.current.delete(
+                key,
+              );
+            }
+          }
+        },
+      );
+
+      previousProgress.current =
+        latest;
+    },
+  );
+
+  /* ==========================================================
+     ENABLE AUDIO AFTER USER INTERACTION
+  ========================================================== */
+
+  const enableAudio = useCallback(() => {
+    const ctx =
+      getAudioContext();
+
+    if (
+      ctx &&
+      ctx.state === "suspended"
+    ) {
+      void ctx.resume();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener(
+      "pointerdown",
+      enableAudio,
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "wheel",
+      enableAudio,
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "touchstart",
+      enableAudio,
+      { passive: true },
+    );
+
+    return () => {
+      window.removeEventListener(
+        "pointerdown",
+        enableAudio,
+      );
+
+      window.removeEventListener(
+        "wheel",
+        enableAudio,
+      );
+
+      window.removeEventListener(
+        "touchstart",
+        enableAudio,
+      );
+    };
+  }, [enableAudio]);
+
+  /* ==========================================================
+     AMBIENT EFFECTS
+  ========================================================== */
+
+  const glowOpacity =
+    useTransform(
+      scrollYProgress,
+      [0, 0.3, 0.65, 1],
+      [0.035, 0.075, 0.055, 0.025],
+    );
 
   return (
-    <section className="bg-charcoal-950">
-      <div ref={pinRef} className="relative h-[600vh]">
-        <div className="sticky top-0 h-screen overflow-hidden">
-          {/* Stage: heading centered, cards scattered around it */}
-          <div className="relative mx-auto h-full max-w-[1400px] px-6">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <ScrollHeading progress={scrollYProgress} />
-            </div>
+    <section
+      ref={rootRef}
+      aria-label="Our process"
+      className="
+        relative
+        h-[900vh]
+        w-full
+        bg-[#080808]
+      "
+    >
+      <div
+        className="
+          sticky
+          top-0
+          h-[100svh]
+          min-h-[42rem]
+          w-full
+          overflow-hidden
+          bg-[#080808]
+        "
+      >
+        {/* ======================================================
+           AMBIENT LIGHT
+        ====================================================== */}
 
-            {steps.map((step, i) => (
-              <FloatingCard
-                key={step.number}
-                step={step}
-                index={i}
-                progress={scrollYProgress}
-              />
-            ))}
-          </div>
+        <motion.div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            left-[28%]
+            top-[53%]
+            z-0
+            h-[50vmin]
+            w-[50vmin]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-[#C45A19]
+            blur-[150px]
+          "
+          style={{
+            opacity: glowOpacity,
+          }}
+        />
+
+        {/* ======================================================
+           ULTRA SUBTLE ARCHITECTURAL GRID
+        ====================================================== */}
+
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            z-0
+            opacity-[0.022]
+            [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)]
+            [background-size:100px_100px]
+          "
+        />
+
+        {/* ======================================================
+           TOP BRAND LINE
+        ====================================================== */}
+
+        <div
+          className="
+            absolute
+            left-6
+            right-6
+            top-5
+            z-50
+            flex
+            items-center
+            justify-between
+            md:left-[4vw]
+            md:right-[4vw]
+            md:top-7
+          "
+        >
+          <span
+            className="
+              font-mono
+              text-[8px]
+              uppercase
+              tracking-[0.2em]
+              text-white/22
+            "
+          >
+            WOWTHERM
+          </span>
+
+          <span
+            className="
+              font-mono
+              text-[8px]
+              uppercase
+              tracking-[0.2em]
+              text-white/20
+            "
+          >
+            UNDERFLOOR HEATING / SYSTEM
+          </span>
+        </div>
+
+        {/* ======================================================
+           HEADING
+        ====================================================== */}
+
+        <ProcessHeading
+          progress={scrollYProgress}
+        />
+
+        {/* ======================================================
+           HEATING SYSTEM — LEFT
+        ====================================================== */}
+
+        <div
+          className="
+            absolute
+            left-[3.5vw]
+            top-[54%]
+            z-10
+            w-[min(59vw,63rem)]
+            -translate-y-1/2
+
+            max-md:left-1/2
+            max-md:top-[42%]
+            max-md:w-[91vw]
+            max-md:-translate-x-1/2
+          "
+        >
+          <ProcessHeatingSystem
+            progress={scrollYProgress}
+          />
+        </div>
+
+        {/* ======================================================
+           CONTENT — RIGHT
+           IMPORTANT: completely separate from the mat
+        ====================================================== */}
+
+        <div className="absolute inset-0 z-30">
+          {STEPS.map((step, index) => (
+            <ProcessStepContent
+              key={step.number}
+              index={index}
+              progress={scrollYProgress}
+            />
+          ))}
+        </div>
+
+        {/* ======================================================
+           TIMELINE
+        ====================================================== */}
+
+        <ProcessTimeline
+          progress={scrollYProgress}
+        />
+
+        {/* ======================================================
+           SMALL BOTTOM LABEL
+        ====================================================== */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            bottom-6
+            left-6
+            z-40
+            font-mono
+            text-[8px]
+            uppercase
+            tracking-[0.18em]
+            text-white/18
+            md:bottom-7
+            md:left-[4vw]
+          "
+        >
+          ENGINEERED COMFORT
+        </div>
+
+        {/* ======================================================
+           MOBILE INDEX
+        ====================================================== */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            bottom-6
+            right-6
+            z-40
+            font-mono
+            text-[8px]
+            tracking-[0.15em]
+            text-white/18
+            md:hidden
+          "
+        >
+          01 — 05
         </div>
       </div>
     </section>

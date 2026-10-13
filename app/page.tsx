@@ -24,7 +24,6 @@ export default function HomePage() {
         <Projects />
         <Benefits />
         <ProductShowcase />
-        
         <Process />
         <Testimonials />
         <FinalCta />
